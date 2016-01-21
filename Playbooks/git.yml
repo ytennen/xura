@@ -1,4 +1,6 @@
 - hosts: localhost
+  vars:
+    HOST: 172.31.0.42
   tasks:
   - name: install git
     sudo: yes
@@ -18,5 +20,7 @@
     lineinfile: dest=~/.bashrc regexp='^export M2=' line='export M2=$M2_HOME/bin/'
   - name: update .bashrc
     lineinfile: dest=~/.bashrc regexp='^PATH=.*\$M2.*' line='PATH=$PATH:$M2'
-
-  
+  - name: Prepare settings.xml for MAVEN
+    template:
+      src: ~/xura/templates/settings_mvn_tmpl.xml
+      dest: ~/
