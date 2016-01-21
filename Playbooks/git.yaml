@@ -18,4 +18,5 @@
     lineinfile: dest=~/.bashrc regexp='^export M2=' line='export M2=$M2_HOME/bin/'
   - name: update .bashrc
     lineinfile: dest=~/.bashrc regexp='^PATH=.*\$M2.*' line='PATH=$PATH:$M2'
+
   
