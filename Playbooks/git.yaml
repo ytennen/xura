@@ -1,0 +1,10 @@
+- hosts: localhost
+  tasks:
+  - name: install git
+    sudo: yes
+    yum: name=git state=latest 
+  - name: get xura code from git
+    git: repo=git://github.com/ytennen/xura dest=~/xura update=no
+  - name: get petclinic code
+    git: repo=git://github.com/ytennen/spring-petclinic dest=~/petclinic update=no
+  
