@@ -7,4 +7,15 @@
     git: repo=git://github.com/ytennen/xura dest=~/xura update=no
   - name: get petclinic code
     git: repo=git://github.com/ytennen/spring-petclinic dest=~/petclinic update=no
+  - name: download maven
+    get_url: url=http://apache.mivzakim.net/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz dest=~/
+  - name: install maven
+    unarchive: src=~/apache-maven-3.3.9-bin.tar.gz dest=/opt
+    sudo: yes
+  - name: update .bashrc
+    lineinfile: dest=~/.bashrc regexp='^export M2_HOME=' line='export M2_HOME=/opt/apache-maven-3.3.9' 
+  - name: update .bashrc
+    lineinfile: dest=~/.bashrc regexp='^export M2=' line='export M2=$M2_HOME/bin/'
+  - name: update .bashrc
+    lineinfile: dest=~/.bashrc regexp='^PATH=.*\$M2.*' line='PATH=$PATH:$M2'
   
