@@ -13,3 +13,13 @@
 
     - name: check or build image of clinic
       docker_image: path="{{DOCKERFILE}}" name="clinic" state=present
+      become: yes
+      become_user: ec2-user
+      become_method: su
+    - name: start image
+      docker: 
+        name: image
+        image: clinic
+        state: restarted
+        ports:
+          - "9090:8080"
