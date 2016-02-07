@@ -1,0 +1,15 @@
+- hosts: localhost
+  sudo: yes
+  vars:
+    WARFILE: petclinic.war
+    WAR: /home/ec2-user
+    DOCKERFILE: /home/ec2-user
+  tasks:
+    - name: download war
+      get_url: url=http://52.28.236.118:8081/artifactory/list/libs-snapshot-local/org/springframework/samples/spring-petclinic-YoniDima/1.0.0-SNAPSHOT/spring-petclinic-YoniDima-1.0.0-20160207.111424-1.war dest={{WAR}}/{{WARFILE}} mode=0777
+
+    - name: update docker file
+      template: src=/devops-course/xura/Docker/Dockerfile dest={{DOCKERFILE}}/Dockerfile
+
+    - name: check or build image of clinic
+      docker_image: path="{{DOCKERFILE}}" name="clinic" state=present
